@@ -1,0 +1,22 @@
+{
+  "name": "onebitflix",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@adminjs/express": "~4.0.1",
+    "@adminjs/sequelize": "~2.1.0",
+    "@adminjs/upload": "~2.0.1",
+    "adminjs": "~5.5.1",
+    "express": "~4.17.2",
+    "express-formidable": "~1.2.0",
+    "pg": "~8.7.1",
+    "sequelize": "~6.13.0"
+  }
+}
