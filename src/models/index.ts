@@ -3,11 +3,11 @@ import { Course } from "./Course";
 import { Episode } from "./episode";
 import { User } from "./User";
 
-Category.hasMany(Course);
-Course.belongsTo(Category);
+Category.hasMany(Course, { as: 'courses' });
+Course.belongsTo(Category); 
 
-Course.hasMany(Episode)
-Episode.belongsTo(Course)
+Course.hasMany(Episode, { as: 'episodes' });//na association o sequelize por padrão fara: 'Episodes"
+Episode.belongsTo(Course);
 
 export {
   Category,
