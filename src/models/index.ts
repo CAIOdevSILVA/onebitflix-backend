@@ -6,8 +6,8 @@ import { User } from "./User";
 Category.hasMany(Course, { as: 'courses' });
 Course.belongsTo(Category); 
 
-Course.hasMany(Episode)//na association o sequelize por padrão fara: 'Episodes"
-Episode.belongsTo(Course)
+Course.hasMany(Episode, { as: 'episodes' });//na association o sequelize por padrão fara: 'Episodes"
+Episode.belongsTo(Course);
 
 export {
   Category,
