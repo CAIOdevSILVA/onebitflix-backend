@@ -5,8 +5,9 @@ import { router } from "./routes";
 
 const app = express();
 
-app.use(adminJs.options.rootPath, adminJsRouter);
+app.use(express.json());
 app.use(router);
+app.use(adminJs.options.rootPath, adminJsRouter);
 
 app.use(express.static('public'));
 
