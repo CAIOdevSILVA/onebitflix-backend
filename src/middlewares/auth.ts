@@ -20,17 +20,41 @@ export function ensureAuth(req: AuthenticatedRequest, res: Response, next: NextF
 
   const token = authorizationHeader.replace(/Bearer /, ''); //No header o token vem assim: Bearer fsd5fsd5f4s5fs56fs64fs, com a regex retiramos o Bearer e permace apenas o token.
 
-  jwtService.virifyToken(token, (error, decoded) => {
+  jwtService.virifyToken(token, async(error, decoded) => {
     if(error || typeof decoded === "undefined") {
       return res.status(401).json(
         { message: "Não autorizado: Token inválido."}
       );
-    }
+    };
 
-    userService.findByEmail((decoded as JwtPayload).email).then(user => {
-      req.user = user
-      next();
-    });
+    const user = await userService.findByEmail((decoded as JwtPayload).email)
+    req.user = user;
+    next();
   });
+};
 
-}
+export function ensureAuthViaQuery(req: AuthenticatedRequest, res: Response, next: NextFunction) {
+  const { token } = req.query;
+
+  if(!token) return res.status(401).json(
+    { message: "Não autorizado: Nenhum token foi encontrado." }
+  );
+
+  if(typeof token !== "string"){
+    return res.status(401).json(
+      { message: "O parâmetro Token deve ser do tipo string" }
+    );
+  };
+
+  jwtService.virifyToken(token, async(error, decoded) => {
+    if(error || typeof decoded === "undefined") {
+      return res.status(401).json(
+        { message: "Não autorizado: Token inválido."}
+      );
+    };
+
+    const user = await userService.findByEmail((decoded as JwtPayload).email);
+    req.user = user;
+    next();
+  });
+};
