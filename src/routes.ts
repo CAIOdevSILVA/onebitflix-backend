@@ -25,6 +25,7 @@ router.post('/favorites', ensureAuth, favoritesController.save);
 router.delete('/favorites/:id', ensureAuth, favoritesController.delete);
 
 router.post('/likes', ensureAuth, likesController.save);
+router.delete('/likes/:id', ensureAuth, likesController.delete);
 
 router.get('/episodes/stream', ensureAuthViaQuery,episodesController.stream);
 
