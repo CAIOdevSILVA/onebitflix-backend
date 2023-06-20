@@ -29,5 +29,7 @@ router.post('/likes', ensureAuth, likesController.save);
 router.delete('/likes/:id', ensureAuth, likesController.delete);
 
 router.get('/episodes/stream', ensureAuthViaQuery,episodesController.stream);
+router.get('/episodes/:id/watchTime', ensureAuth,episodesController.getWatchTime);
+router.post('/episodes/:id/watchTime', ensureAuth,episodesController.setWatchTime);
 
 export { router };
